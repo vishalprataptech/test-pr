@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-    <h1>Hello World , Bam Chiki Chiki Bam , Jai Jai Shree Ram , Jai Shree Krishna , Har Har Mahadev, Satyamev Jayate❤️</h1>
+    <h1>Hello World , Bam Chiki Chiki Bam , </h1>
     </>
   )
 }
