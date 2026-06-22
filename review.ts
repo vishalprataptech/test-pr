@@ -11,11 +11,6 @@ imp
   .returning();
         });
 
-
-        const chunks = await step.run("fetch-and-chunk-codebase", async () => {
-
-            const repoSyncRecord = await db.query.repoSync.findFirst({
-  where: eq(repoSync.id, repoSyncId),
 });
 
 if (!repoSyncRecord) {
@@ -48,11 +43,27 @@ if (!repoSyncRecord) {
         }
 
         await step.run("save-vectors-to-pinecone", async () => {
-            await saveRepoChunks(namespace, chunks);
-        });
 
+            import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { db } from "@/src/index"; // your drizzle instance
+import { nextCookies } from "better-auth/next-js";
+import * as schema from "@/src/db/schema";
+export const auth = betterAuth({
+   database: drizzleAdapter(db, {
+        provider: "pg", // or "mysql", "sqlite"
+        schema,
+    }),
+     socialProviders: { 
+    github: { 
+      clientId: process.env.GITHUB_CLIENT_ID as string, 
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string, 
 
-        await step.run("mark-synced", async () => {
-          await db
-  .update(repoSync)
-  .set({
+       mapProfileToUser:async(profile)=>({
+        email:profile.email ?? `${profile.id}@users.noreply.github.com`,
+        name:profile.name ?? profile.login,
+      })
+    }, 
+  }, 
+   plugins: [nextCookies()] // make sure this is the last plugin in the array 
+});
