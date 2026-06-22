@@ -7,22 +7,7 @@ import {
     getRepoFiles,
     saveRepoChunks,
 } from "./repo-sync";
-import { eq } from "drizzle-orm";
-import {repoSync} from "@/src/db/schema"
-
-    }
-},
-
-    async ({ event, step }) => {
-        const repoSyncId = event.data.repoSyncId;
-
-        const syncRepo = await step.run("mark-syncing", async () => {
-        return db
-  .update(repoSync)
-  .set({
-    status: "syncing",
-  })
-  .where(eq(repoSync.id, repoSyncId))
+imp
   .returning();
         });
 
