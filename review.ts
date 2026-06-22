@@ -56,18 +56,3 @@ if (!repoSyncRecord) {
           await db
   .update(repoSync)
   .set({
-    status: "synced",
-    syncedAt: new Date(),
-    chunkCount: chunks.length,
-  })
-  .where(eq(repoSync.id, repoSyncId));
-        });
-
-
-        return {
-            repoSyncId,
-            status: "synced",
-            chunkCount: chunks.length,
-        }
-    }
-)
