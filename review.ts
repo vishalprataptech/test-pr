@@ -11,11 +11,6 @@ imp
   .returning();
         });
 
-
-        const chunks = await step.run("fetch-and-chunk-codebase", async () => {
-
-            const repoSyncRecord = await db.query.repoSync.findFirst({
-  where: eq(repoSync.id, repoSyncId),
 });
 
 if (!repoSyncRecord) {
