@@ -10,17 +10,6 @@ import {
 import { eq } from "drizzle-orm";
 import {repoSync} from "@/src/db/schema"
 
-
-export const syncRepoCodebaseFunction = inngest.createFunction({
-    id: "sync-repo-codebas",
-    triggers: { event: "repo/sync.requested" },
-    onFailure: async ({ event }) => {
-    await db
-  .update(repoSync)
-  .set({
-    status: "failed",
-  })
-  .where(eq(repoSync.id, event.data.event.data.repoSyncId));
     }
 },
 
