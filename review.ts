@@ -43,11 +43,3 @@ if (!repoSyncRecord) {
         }
 
         await step.run("save-vectors-to-pinecone", async () => {
-            await saveRepoChunks(namespace, chunks);
-        });
-
-
-        await step.run("mark-synced", async () => {
-          await db
-  .update(repoSync)
-  .set({
